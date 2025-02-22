@@ -33,7 +33,7 @@ const SectionList: FC = () => {
   };
 
   return (
-    <div className="w-64 max-h-[80vh] p-4 bg-gray-800 text-white rounded-lg space-y-4 overflow-hidden">
+    <div className="w-[90%] max-h-[80vh] p-4 bg-gray-800 text-white rounded-lg space-y-4 overflow-hidden">
       <div className="font-bold text-xl mb-4">Sections</div>
       <div className="my-4">
         <TextInput
@@ -51,15 +51,14 @@ const SectionList: FC = () => {
             onSelect={() => handleSelect(section.id)}
           />
         ))}
+        <Button
+          onClick={() => setIsModalOpen(true)}
+          variant="colored"
+          color="blue"
+        >
+          + Custom Section
+        </Button>
       </div>
-      <Button
-        onClick={() => setIsModalOpen(true)}
-        variant="colored"
-        color="blue"
-      >
-        + Custom Section
-      </Button>
-
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

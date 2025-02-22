@@ -1,0 +1,23 @@
+.markdown-body h1 {
+  @apply text-3xl font-bold;
+}
+
+.markdown-body h2 {
+  @apply text-2xl font-bold;
+}
+
+.markdown-body h3 {
+  @apply text-xl font-bold;
+}
+
+.markdown-body pre {
+  @apply bg-gray-800 text-white p-4 my-3 rounded-md;
+}
+
+.markdown-body code {
+  @apply bg-gray-800 p-1 rounded-sm;
+}
+
+.markdown-body a {
+  @apply text-blue-500 underline;
+}

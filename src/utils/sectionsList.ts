@@ -6,7 +6,7 @@ export const sectionsListArr: Section[] = [
   { id: '3', title: 'Usage' },
   { id: '4', title: 'Contributing' },
   { id: '5', title: 'License' },
-  { id: '6', title: 'Badges 🏅' },
+  // { id: '6', title: 'Badges 🏅' },
   { id: '7', title: 'Demo 🎥' },
   { id: '8', title: 'Deployment 🚀' },
   { id: '9', title: 'Documentation 📚' },
