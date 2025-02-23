@@ -19,7 +19,7 @@ const TextInput: FC<TextInputProps> = ({ value, onChange, placeholder, label, id
       <input
         type="text"
         id={id}
-        className="w-full p-2 bg-gray-800 text-white rounded-md border border-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-gray-700"
+        className="w-full p-2 bg-gray-800 text-white rounded-md border border-gray-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-gray-700"
         value={value}
         onChange={onChange}
         placeholder={placeholder}

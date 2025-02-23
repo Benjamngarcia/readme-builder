@@ -37,7 +37,7 @@ const DraggableSection: FC<DraggableSectionProps> = forwardRef<
   return (
     <div
       ref={dragRef}
-      className={`flex items-center justify-between p-4 border-2 rounded-md my-2 ${
+      className={`flex items-center justify-between p-4 border-2 rounded-md my-2 transition-all duration-300 ${
         isDragging || isSelected ? "border-blue-500" : "border-gray-500"
       } 
       bg-gray-800 hover:bg-gray-700 cursor-pointer`}

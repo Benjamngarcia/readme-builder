@@ -15,7 +15,7 @@
 }
 
 .markdown-body code {
-  @apply bg-gray-800 p-1 rounded-sm;
+  @apply bg-gray-800 p-1 rounded-sm flex flex-wrap;
 }
 
 .markdown-body a {
