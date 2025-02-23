@@ -68,8 +68,9 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
   };
 
   return (
-    <div className="flex space-x-4 p-6 bg-gray-800 text-white rounded-lg h-full max-h-screen">
-      <div className="flex-grow min-h-full">
+    <div className="flex flex-col lg:flex-row space-x-4 p-6 border border-gray-700 bg-background text-white rounded-xl h-full max-h-screen">
+      {/* Code Editor Section */}
+      <div className="flex-grow min-h-full bg-backgroundSecondary rounded-lg shadow-lg p-4">
         <div className="flex justify-between items-center mb-4">
           <label className="flex items-center space-x-2 text-gray-300">
             <IconCode size={20} />
@@ -79,7 +80,7 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
 
         <div
           ref={handleDropRef}
-          className={`flex-grow p-6 bg-gray-800 max-h-full h-[90%] rounded-lg border-2 border-dashed ${
+          className={`flex-grow bg-rbackgroundSecondary p-4 rounded-lg border-2 border-dashed transition-all duration-300 ${
             canDrop ? "border-blue-500" : "border-gray-500"
           } ${isOver ? "bg-gray-700" : ""}`}
         >
@@ -87,14 +88,15 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
             value={value}
             onChange={handleChange}
             preview="edit"
-            className="h-full max-h-screen"
+            className="h-full w-full rounded-lg border-non bg-red-500"
             height="100%"
           />
         </div>
       </div>
 
-      <div className="w-1/2 max-h-full overflow-y-auto">
-        <div className="flex justify-between items-center">
+      {/* Preview Section */}
+      <div className="w-full lg:w-1/2 max-h-full overflow-y-auto bg-backgroundSecondary rounded-lg shadow-lg p-4">
+        <div className="flex justify-between items-center mb-4">
           <label className="flex items-center space-x-2 text-gray-300">
             <IconEye size={20} />
             <span>Preview</span>
@@ -108,7 +110,7 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
               ref={(el) => {
                 sectionsRef.current[section.id] = el;
               }}
-              className={`p-4 bg-gray-700 text-white cursor-pointer markdown-body 
+              className={`p-4 bg-backgroundSecondary text-white cursor-pointer markdown-body 
                 ${getSectionStyle(section.id)}`}
               onClick={() => handleSectionClick(section.id)}
             >

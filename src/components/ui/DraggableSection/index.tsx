@@ -38,13 +38,13 @@ const DraggableSection: FC<DraggableSectionProps> = forwardRef<
     <div
       ref={dragRef}
       className={`flex items-center justify-between p-4 border-2 rounded-md my-2 transition-all duration-300 ${
-        isDragging || isSelected ? "border-blue-500" : "border-gray-500"
+        isDragging || isSelected ? "border-blue-500" : "border-gray-700"
       } 
-      bg-gray-800 hover:bg-gray-700 cursor-pointer`}
+      bg-background hover:bg-gray-700 cursor-pointer`}
       onClick={onSelect}
     >
       <div className="flex items-center space-x-2">
-        <span className="text-white text-lg font-semibold">{section.title}</span>
+        <span className="text-white text-lg">{section.title}</span>
       </div>
       <IconGripVertical className="text-gray-400 hover:text-white cursor-pointer" size={20} />
     </div>
