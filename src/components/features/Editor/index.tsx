@@ -28,13 +28,8 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: "section",
     drop: (item: Section) => {
-      const sectionContent = sectionBank[item.id];
-      if (sectionContent) {
-        setValue((prevValue) => prevValue + "\n\n" + sectionContent);
-      } else {
-        const sectionContentDynamic = `## ${item.title}\n\n`;
-        setValue((prevValue) => prevValue + "\n\n" + sectionContentDynamic);
-      }
+      const sectionContent = sectionBank[item.id] || `## ${item.title}\n\n`;
+      setValue((prevValue) => prevValue + "\n\n" + sectionContent);
     },
     collect: (monitor) => ({
       isOver: monitor.isOver(),

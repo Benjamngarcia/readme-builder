@@ -21,12 +21,10 @@ If you would like to contribute to this project, please fork the repository and 
   '5': `## License
 This project is licensed under the MIT License.`,
 
-//   '6': `## Badges 🏅
-// Add badges to indicate build status, version, and other project information:
-// \`\`\`mdx
-
-// ![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-// \`\`\``,
+  '6': `## Badges 🏅
+Add badges to indicate build status, version, and other project information:
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+`,
 
   '7': `## Demo 🎥
 Here is a live demo of the application: [Live Demo](https://example.com/demo)`,
