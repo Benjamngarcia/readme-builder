@@ -6,12 +6,21 @@ import ReactMarkdown from "react-markdown";
 import { useDrop } from "react-dnd";
 import { Section } from "../../../types";
 import { sectionBank } from "../../../utils/sectionsBank";
-import { IconCode, IconEye, IconTrash } from "@tabler/icons-react";
+import {
+  IconCode,
+  IconEye,
+  IconTrash,
+  IconDownload,
+  IconCopy,
+} from "@tabler/icons-react";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
+import Button from "../../../components/ui/Button";
 
 const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
-  const [value, setValue] = useState<string>("**Welcome to your custom README.md**");
+  const [value, setValue] = useState<string>(
+    "**Welcome to your custom README.md**"
+  );
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
 
   const sectionsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
@@ -67,6 +76,25 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
     setSelectedSection(null);
   };
 
+  const downloadFile = () => {
+    const finalContent = `${value}\n\n\n\nThis README was created with: [Readme Builder](https://example.com/demo)`;
+    const blob = new Blob([finalContent], { type: "text/markdown" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "README.md";
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const copyToClipboard = () => {
+    const finalContent = `${value}\n\n\n\nThis README was created with: [Readme Builder](https://example.com/demo)`;
+    navigator.clipboard.writeText(finalContent).then(
+      () => alert("Contenido copiado al portapapeles!"),
+      (err) => alert("Error al copiar: " + err)
+    );
+  };
+
   return (
     <div className="flex flex-col lg:flex-row space-x-4 p-6 border border-gray-700 bg-background text-white rounded-xl h-full max-h-screen">
       {/* Code Editor Section */}
@@ -76,6 +104,24 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
             <IconCode size={20} />
             <span>Code</span>
           </label>
+          <div className="flex space-x-4">
+            <Button
+              onClick={downloadFile}
+              color="green"
+              size="small"
+              variant="outlined"
+              icon={<IconDownload size={16} />}
+            >
+              Download
+            </Button>
+            <Button
+              onClick={copyToClipboard}
+              color="gray"
+              size="small"
+              variant="outlined"
+              icon={<IconCopy size={16} />}
+            />
+          </div>
         </div>
 
         <div
@@ -110,8 +156,9 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
               ref={(el) => {
                 sectionsRef.current[section.id] = el;
               }}
-              className={`p-4 bg-backgroundSecondary text-white cursor-pointer markdown-body 
-                ${getSectionStyle(section.id)}`}
+              className={`p-4 bg-backgroundSecondary text-white cursor-pointer markdown-body ${getSectionStyle(
+                section.id
+              )}`}
               onClick={() => handleSectionClick(section.id)}
             >
               {selectedSection === section.id && (
