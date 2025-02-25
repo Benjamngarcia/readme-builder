@@ -2,7 +2,7 @@ import { FC } from "react";
 
 interface ButtonProps {
   onClick: () => void;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   color?: "blue" | "gray" | "red" | "green";
   variant?: "colored" | "outlined";
   size?: "small" | "medium" | "large";
@@ -17,7 +17,7 @@ const Button: FC<ButtonProps> = ({
   size = "medium",
   icon,
 }) => {
-  const baseStyles = "flex items-center justify-center rounded-md focus:outline-none focus:ring-2";
+  const baseStyles = "flex items-center justify-center rounded-md focus:outline-none focus:ring-2 transition-all duration-300";
   const colorStyles = {
     blue: variant === "colored" ? "bg-blue-600 text-white hover:bg-blue-700" : "border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white",
     gray: variant === "colored" ? "bg-gray-500 text-white hover:bg-gray-600" : "border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white",
@@ -34,7 +34,7 @@ const Button: FC<ButtonProps> = ({
   return (
     <button
       onClick={onClick}
-      className={`${baseStyles} ${colorStyles[color]} ${sizeStyles[size]} ${icon ? "space-x-2" : ""}`}
+      className={`${baseStyles} ${colorStyles[color]} ${sizeStyles[size]} ${icon ? "space-x-2 gap-2" : ""}`}
     >
       {icon && icon}
       {children}

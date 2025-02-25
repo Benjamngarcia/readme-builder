@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Introduction
+Welcome to the README Builder project! This tool allows you to quickly generate professional and customizable README files for your software projects. Whether you're an open-source contributor or just need a solid README for your personal project, this tool is designed to save you time and effort.
 
-## Getting Started
 
-First, run the development server:
-
+## Run Locally 🖥️
+To run this project locally, follow these steps:
+1. Clone the repository:
+```bash
+git clone https://github.com/Benjamngarcia/readme-builder
+```
+2. Install the dependencies:
+```bash
+npm install
+```
+3. Run the project:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used 🛠
+[![My Skills](https://skillicons.dev/icons?i=ts,nextjs,tailwind,md,vercel)](https://skillicons.dev)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Features ✨
+- **Easy to use**: A user-friendly interface that lets you generate a README in minutes.
+- **Customizable**: Add your own sections and update existing ones to fit your needs.
+- **Real-time Preview**: View a live preview of your README as you build it.
+- **Exportable**: Download your generated README.md file or copy it directly to your clipboard.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Screenshots 📸
+Here are some screenshots of the project:
+![Main Screen](https://firebasestorage.googleapis.com/v0/b/portafolio-689ca.appspot.com/o/Captura%20de%20pantalla%202025-02-25%20122227.png?alt=media&token=94140557-1e05-484c-8222-c307cae98f2e)
 
-## Learn More
+## To Do 📝
+- [ ]  Add README templates
+- [ ] Optimize performance for large README files
 
-To learn more about Next.js, take a look at the following resources:
+## Support 🙋‍♂️
+If you encounter any issues or have any questions, feel free to reach out. You can open an issue on the GitHub repository or contact us directly at bejamin.webdev3@gmail.com
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This README was created with: [Readme Builder](https://example.com/demo)
