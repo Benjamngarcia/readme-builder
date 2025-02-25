@@ -13,7 +13,7 @@ export const sectionsListArr: Section[] = [
   { id: '10', title: 'Environment Variables 🌱' },
   { id: '11', title: 'FAQ ❓' },
   { id: '12', title: 'Features ✨' },
-  { id: '13', title: 'Tech Stack ⚙️' },
+  { id: '13', title: 'Technlogies Used 🛠️' },
   { id: '14', title: 'Screenshots 📸' },
   { id: '15', title: 'Run Locally 🖥️' },
 ];

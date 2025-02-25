@@ -7,8 +7,13 @@ import DraggableSection from "../../ui/DraggableSection";
 import TextInput from "../../ui/TextInput";
 import Modal from "../../ui/Modal";
 import Button from "../../../components/ui/Button";
+import { useEditorContext } from "../../../context/EditorContext";
+import { availableTechnologies } from "../../../utils/availableTechnologies";
+import { IconArrowLeft } from "@tabler/icons-react";
+import TechnologiesList from "@/components/ui/TechnologiesList";
 
 const SectionList: FC = () => {
+  const { selectedSectionId, setSelectedSectionId } = useEditorContext();
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [sections, setSections] = useState<Section[]>(sectionsListArr);
   const [newSectionName, setNewSectionName] = useState<string>("");
@@ -17,6 +22,10 @@ const SectionList: FC = () => {
 
   const filteredSections = sections.filter((section) =>
     section.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const filteredTechnologies = availableTechnologies.filter((tech) =>
+    tech.label.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const handleSelect = (id: string) => {
@@ -34,31 +43,57 @@ const SectionList: FC = () => {
 
   return (
     <div className="w-[90%] max-h-[80vh] p-4 bg-background text-white border border-gray-700 rounded-lg space-y-4 overflow-hidden">
-      <div className="font-bold text-xl mb-4">Sections</div>
+      {selectedSectionId === "section-13" && (
+        <Button
+          onClick={() => setSelectedSectionId(null)}
+          variant="outlined"
+          color="gray"
+          icon={<IconArrowLeft />}
+        >
+          Back to Editor
+        </Button>
+      )}
+      <div className="font-bold text-xl mb-4">
+        {selectedSectionId === "section-13" ? "Technologies" : "Sections"}
+      </div>
+      <p className="text-sm text-gray-400">
+        {selectedSectionId === "section-13"
+          ? "Select the technologies that you wish display."
+          : "Drag and drop sections to rearrange them."}
+      </p>
       <div className="my-4">
         <TextInput
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder="Search a component..."
+          placeholder={
+            selectedSectionId === "section-13"
+              ? "Search Technologies..."
+              : "Search Sections..."
+          }
         />
       </div>
-      <div className="overflow-y-auto max-h-[60vh] space-y-2 pr-4">
-        {filteredSections.map((section) => (
-          <DraggableSection
-            key={section.id}
-            section={section}
-            isSelected={selectedSection === section.id}
-            onSelect={() => handleSelect(section.id)}
-          />
-        ))}
-        <Button
-          onClick={() => setIsModalOpen(true)}
-          variant="colored"
-          color="blue"
-        >
-          + Custom Section
-        </Button>
-      </div>
+
+      {selectedSectionId === "section-13" ? (
+        <TechnologiesList filteredTechnologies={filteredTechnologies} />
+      ) : (
+        <div className="overflow-y-auto max-h-[60vh] space-y-2 pr-4">
+          {filteredSections.map((section) => (
+            <DraggableSection
+              key={section.id}
+              section={section}
+              isSelected={selectedSection === section.id}
+              onSelect={() => handleSelect(section.id)}
+            />
+          ))}
+          <Button
+            onClick={() => setIsModalOpen(true)}
+            variant="colored"
+            color="blue"
+          >
+            + Custom Section
+          </Button>
+        </div>
+      )}
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

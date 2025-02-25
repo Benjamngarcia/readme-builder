@@ -57,10 +57,9 @@ Here are the required environment variables:
 - Multi-platform support
 - Fast deployment`,
 
-  '13': `## Tech Stack ⚙️
-- **Frontend:** React, TypeScript
-- **Backend:** Node.js, Express
-- **Database:** PostgreSQL`,
+  '13': `## Technologies Used 🛠
+[![My Skills](https://skillicons.dev/icons?i=js,html,css,wasm)](https://skillicons.dev)
+`,
 
   '14': `## Screenshots 📸
 Here are some screenshots of the project:
@@ -79,5 +78,5 @@ npm install
 3. Run the project:
 \`\`\`bash
 npm start
-\`\`\``
+\`\`\``,
 };

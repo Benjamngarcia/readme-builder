@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState, forwardRef, useRef } from "react";
+import { FC, useState, forwardRef, useRef, useEffect } from "react";
 import MDEditor from "@uiw/react-md-editor";
 import ReactMarkdown from "react-markdown";
 import { useDrop } from "react-dnd";
@@ -12,16 +12,18 @@ import {
   IconTrash,
   IconDownload,
   IconCopy,
+  IconPencil,
 } from "@tabler/icons-react";
 import remarkGfm from "remark-gfm";
 import rehypeHighlight from "rehype-highlight";
 import Button from "../../../components/ui/Button";
+import { useEditorContext } from "../../../context/EditorContext";
 
 const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
-  const [value, setValue] = useState<string>(
-    "**Welcome to your custom README.md**"
-  );
+  const { selectedSectionId, skilliconsLink, setSelectedSectionId } = useEditorContext();
+  const [value, setValue] = useState<string>("**Welcome to your custom README.md**");
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
+  const [sections, setSections] = useState<string[]>(['0']);
 
   const sectionsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
@@ -30,6 +32,7 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
     drop: (item: Section) => {
       const sectionContent = sectionBank[item.id] || `## ${item.title}\n\n`;
       setValue((prevValue) => prevValue + "\n\n" + sectionContent);
+      setSections((prevSections) => [...prevSections, item.id]);
     },
     collect: (monitor) => ({
       isOver: monitor.isOver(),
@@ -60,7 +63,7 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
 
   const getSections = (content: string) => {
     return content.split(/\r?\n\s*\r?\n/).map((section, index) => ({
-      id: `section-${index}`,
+      id: `section-${sections[index]}`,
       content: section.trim(),
     }));
   };
@@ -89,6 +92,19 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
       (err) => alert("Error al copiar: " + err)
     );
   };
+
+  const handleEditInfoClick = (id: string) => {
+    setSelectedSectionId(id);
+  };
+
+  useEffect(() => {
+    if (selectedSectionId === "section-13" && skilliconsLink) {
+      setValue((prevValue) => {
+        const regex = /https:\/\/skillicons.dev\/icons\?i=[\w,]+/;
+        return prevValue.replace(regex, skilliconsLink);
+      });
+    }
+  }, [skilliconsLink]);
 
   return (
     <div className="flex flex-col lg:flex-row space-x-4 p-6 border border-gray-700 bg-background text-white rounded-xl h-full max-h-screen">
@@ -172,6 +188,19 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
                   </span>
                 </div>
               )}
+
+              {section.id == "section-13" && (
+                <Button
+                  onClick={() => handleEditInfoClick(section.id)}
+                  size="small"
+                  color="blue"
+                  variant="outlined"
+                  icon={<IconPencil size={16} />}
+                >
+                  Edit Info
+                </Button>
+              )}
+
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeHighlight]}
