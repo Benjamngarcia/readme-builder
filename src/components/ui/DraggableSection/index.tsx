@@ -34,6 +34,7 @@ const DraggableSection: FC<DraggableSectionProps> = forwardRef<
     }
   };
 
+  DraggableSection.displayName = "DraggableSection";
   return (
     <div
       ref={dragRef}

@@ -19,7 +19,7 @@ import rehypeHighlight from "rehype-highlight";
 import Button from "../../../components/ui/Button";
 import { useEditorContext } from "../../../context/EditorContext";
 
-const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
+const Editor: FC = forwardRef<HTMLDivElement>(() => {
   const {
     selectedSectionId,
     skilliconsLink,
@@ -142,6 +142,7 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
     }
   }, [selectedSectionId, skilliconsLink, statsWidgetDetails]);
 
+  Editor.displayName = "Editor";
   return (
     <div className="flex flex-col lg:flex-row space-x-4 p-6 border border-gray-700 bg-background text-white rounded-xl h-full max-h-screen">
       {/* Code Editor Section */}

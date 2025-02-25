@@ -62,7 +62,7 @@ const Landing: FC = () => (
         <h2 className="text-3xl font-semibold text-center">What Our Users Are Saying</h2>
         <div className="mt-10 flex justify-center">
           <div className="w-full md:w-1/2 text-center">
-            <p className="text-lg italic">"An essential tool for any developer. It saves me hours of work!"</p>
+            <p className="text-lg italic">An essential tool for any developer. It saves me hours of work!</p>
             <p className="mt-4 font-semibold">Ian Pérez</p>
           </div>
         </div>
