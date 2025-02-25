@@ -63,7 +63,7 @@ Here are the required environment variables:
 
   '14': `## Screenshots 📸
 Here are some screenshots of the project:
-![Main Screen](https://example.com/screenshot.png)`,
+![Main Screen](https://placehold.co/300x200)`,
 
   '15': `## Run Locally 🖥️
 To run this project locally, follow these steps:

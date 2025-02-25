@@ -59,9 +59,8 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
       : "border border-transparent hover:border-blue-500 transition-all duration-300 hover:rounded-md";
 
   const handleDeleteSection = (id: string) => {
-    // Solo se elimina la sección 0 si es la única sección
     if (sections.length === 1 && sections[0].id === "0") {
-      setSections([]); // Eliminar todas las secciones si solo queda la de bienvenida
+      setSections([]);
     } else {
       setSections((prevSections) =>
         prevSections.filter((section) => section.id !== id)
@@ -189,34 +188,31 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
               )}`}
               onClick={() => handleSectionClick(section.id)}
             >
-              {selectedSection === section.id && (
-                <div className="relative group flex justify-end">
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleDeleteSection(section.id);
-                    }}
-                    className="absolute text-red-500 border-2 border-red-500 rounded-full p-2 hover:bg-red-500 hover:text-white transition-all"
+              <div className="flex gap-2 mb-2">
+                {selectedSection === section.id && (
+                  <Button
+                    onClick={() => handleDeleteSection(section.id)}
+                    size="small"
+                    color="red"
+                    variant="outlined"
+                    icon={<IconTrash size={16} />}
                   >
-                    <IconTrash size={16} />
-                  </button>
-                  <span className="absolute top-9 right-12 translate-y-[-120%] opacity-0 group-hover:opacity-100 group-hover:translate-y-[-130%] transition-all bg-red-500 text-white text-xs py-1 px-2 rounded-md">
                     Delete section
-                  </span>
-                </div>
-              )}
+                  </Button>
+                )}
 
-              {section.id == "13" && (
-                <Button
-                  onClick={() => handleEditInfoClick(section.id)}
-                  size="small"
-                  color="blue"
-                  variant="outlined"
-                  icon={<IconPencil size={16} />}
-                >
-                  Edit Info
-                </Button>
-              )}
+                {section.id == "13" && (
+                  <Button
+                    onClick={() => handleEditInfoClick(section.id)}
+                    size="small"
+                    color="blue"
+                    variant="outlined"
+                    icon={<IconPencil size={16} />}
+                  >
+                    Edit Info
+                  </Button>
+                )}
+              </div>
 
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
