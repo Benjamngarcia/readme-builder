@@ -76,7 +76,7 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
   const downloadFile = () => {
     const finalContent =
       sections.map((section) => section.content).join("\n\n") +
-      "\n\n\n\nThis README was created with: [Readme Builder](https://example.com/demo)";
+      "\n\n\n\nThis README was created with: [Readme Builder](https://readmes-builder.vercel.app/)";
     const blob = new Blob([finalContent], { type: "text/markdown" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -89,7 +89,7 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
   const copyToClipboard = () => {
     const finalContent =
       sections.map((section) => section.content).join("\n\n") +
-      "\n\n\n\nThis README was created with: [Readme Builder](https://example.com/demo)";
+      "\n\n\n\nThis README was created with: [Readme Builder](https://readmes-builder.vercel.app/)";
     navigator.clipboard.writeText(finalContent).then(
       () => alert("Contenido copiado al portapapeles!"),
       (err) => alert("Error al copiar: " + err)
