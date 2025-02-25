@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     title: "Readme Builder",
     description: "The best tool to create your README.md files for your projects and profiles.",
     images: "https://firebasestorage.googleapis.com/v0/b/portafolio-689ca.appspot.com/o/Captura%20de%20pantalla%202025-02-25%20122227.png?alt=media&token=94140557-1e05-484c-8222-c307cae98f2e",
-    // url: "https://example.com/demo",
+    url: "https://readmes-builder.vercel.app/",
     type: "website",
   },
 };
