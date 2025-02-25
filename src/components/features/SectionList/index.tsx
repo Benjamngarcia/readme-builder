@@ -58,7 +58,7 @@ const SectionList: FC = () => {
       </div>
       <p className="text-sm text-gray-400">
         {selectedSectionId === "13"
-          ? "Select the technologies that you wish display."
+          ? "Select the technologies that you wish to display."
           : "Drag and drop sections to rearrange them."}
       </p>
       <div className="my-4">
@@ -74,7 +74,9 @@ const SectionList: FC = () => {
       </div>
 
       {selectedSectionId === "13" ? (
-        <TechnologiesList filteredTechnologies={filteredTechnologies} />
+        <div className="min-h-[60vh]"> {/* Height adjusted here */}
+          <TechnologiesList filteredTechnologies={filteredTechnologies} />
+        </div>
       ) : (
         <div className="overflow-y-auto max-h-[60vh] space-y-2 pr-4">
           {filteredSections.map((section) => (

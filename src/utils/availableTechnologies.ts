@@ -93,6 +93,7 @@ export const availableTechnologies = [
   { label: "HaxeFlixel", value: "haxeflixel", icon: "haxeflixel" },
   { label: "Heroku", value: "heroku", icon: "heroku" },
   { label: "Hibernate", value: "hibernate", icon: "hibernate" },
+  { label: "HTML", value: "html", icon: "html" },
   { label: "Htmx", value: "htmx", icon: "htmx" },
   { label: "Idea", value: "idea", icon: "idea" },
   { label: "Illustrator", value: "ai", icon: "ai" },

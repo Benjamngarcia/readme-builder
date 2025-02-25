@@ -6,20 +6,29 @@ interface TechnologiesListProps {
   filteredTechnologies: Technology[];
 }
 
+const initialStateTech = [
+  { label: "JavaScript", value: "js", icon: "js" },
+  { label: "HTML", value: "html", icon: "html" },
+  { label: "CSS", value: "css", icon: "css" },
+  { label: "WASM", value: "wasm", icon: "wasm" },
+];
+
 const TechnologiesList: React.FC<TechnologiesListProps> = ({
   filteredTechnologies,
 }) => {
   const { setSkilliconsLink } = useEditorContext();
-  const [selectedTechnologiesState, setSelectedTechnologiesState] = useState<
-    any[]
-  >([]);
+  const [selectedTechnologiesState, setSelectedTechnologiesState] = useState<Technology[]>(initialStateTech);
 
-  const handleTechnologySelection = (tech: any) => {
-    setSelectedTechnologiesState((prev) =>
-      prev.includes(tech)
-        ? prev.filter((item) => item !== tech)
-        : [...prev, tech]
-    );
+  const handleTechnologySelection = (tech: Technology) => {
+    if (selectedTechnologiesState.some(t => t.value === tech.value)) {
+      setSelectedTechnologiesState((prev) => 
+        prev.filter((item) => item.value !== tech.value)
+      );
+    } else {
+      setSelectedTechnologiesState((prev) => 
+        [...prev, tech]
+      );
+    }
   };
 
   const generateSkilliconsLink = () => {
@@ -36,15 +45,15 @@ const TechnologiesList: React.FC<TechnologiesListProps> = ({
   }, [selectedTechnologiesState, setSkilliconsLink]);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 min-h-[60vh]">
       <div className="space-y-2">
         <div className="relative">
-          <div className="w-full bg-gray-800 rounded-lg mt-2 p-4 overflow-y-auto max-h-64 space-y-2">
+          <div className="w-full bg-gray-800 rounded-lg mt-2 p-4 overflow-y-auto max-h-96 space-y-3">
             {filteredTechnologies.map((tech) => (
               <div key={tech.value} className="flex items-center space-x-2">
                 <input
                   type="checkbox"
-                  checked={selectedTechnologiesState.includes(tech)}
+                  checked={selectedTechnologiesState.some(t => t.value === tech.value)}
                   onChange={() => handleTechnologySelection(tech)}
                   className="w-4 h-4"
                 />
@@ -52,6 +61,7 @@ const TechnologiesList: React.FC<TechnologiesListProps> = ({
                   src={`https://skillicons.dev/icons?i=${tech.icon}`}
                   alt={tech.label}
                   className="w-5 h-5"
+                  loading="lazy"
                 />
                 <span>{tech.label}</span>
               </div>
@@ -61,7 +71,7 @@ const TechnologiesList: React.FC<TechnologiesListProps> = ({
       </div>
 
       <div className="mt-4 text-sm text-gray-400">
-        This icons are provided by{" "}
+        These icons are provided by{" "}
         <a
           href="https://skillicons.dev/"
           target="_blank"
