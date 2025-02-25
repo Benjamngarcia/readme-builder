@@ -20,10 +20,13 @@ import Button from "../../../components/ui/Button";
 import { useEditorContext } from "../../../context/EditorContext";
 
 const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
-  const { selectedSectionId, skilliconsLink, setSelectedSectionId } = useEditorContext();
-  const [value, setValue] = useState<string>("**Welcome to your custom README.md**");
+  const { selectedSectionId, skilliconsLink, setSelectedSectionId } =
+    useEditorContext();
+  const [sections, setSections] = useState([
+    { id: "0", content: "**Welcome to your custom README.md**" },
+  ]);
+
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
-  const [sections, setSections] = useState<string[]>(['0']);
 
   const sectionsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
@@ -31,8 +34,8 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
     accept: "section",
     drop: (item: Section) => {
       const sectionContent = sectionBank[item.id] || `## ${item.title}\n\n`;
-      setValue((prevValue) => prevValue + "\n\n" + sectionContent);
-      setSections((prevSections) => [...prevSections, item.id]);
+      const newSection = { id: item.id, content: sectionContent };
+      setSections((prevSections) => [...prevSections, newSection]);
     },
     collect: (monitor) => ({
       isOver: monitor.isOver(),
@@ -46,12 +49,6 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
     dropRef.current = node;
   };
 
-  const handleChange = (newValue?: string): void => {
-    if (newValue !== undefined) {
-      setValue(newValue);
-    }
-  };
-
   const handleSectionClick = (id: string) => {
     setSelectedSection(id === selectedSection ? null : id);
   };
@@ -61,21 +58,22 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
       ? "border-2 border-blue-500 transition-all duration-300 relative rounded-md"
       : "border border-transparent hover:border-blue-500 transition-all duration-300 hover:rounded-md";
 
-  const getSections = (content: string) => {
-    return content.split(/\r?\n\s*\r?\n/).map((section, index) => ({
-      id: `section-${sections[index]}`,
-      content: section.trim(),
-    }));
-  };
-
   const handleDeleteSection = (id: string) => {
-    const sections = getSections(value).filter((section) => section.id !== id);
-    setValue(sections.map((section) => section.content).join("\n\n"));
+    // Solo se elimina la sección 0 si es la única sección
+    if (sections.length === 1 && sections[0].id === "0") {
+      setSections([]); // Eliminar todas las secciones si solo queda la de bienvenida
+    } else {
+      setSections((prevSections) =>
+        prevSections.filter((section) => section.id !== id)
+      );
+    }
     setSelectedSection(null);
   };
 
   const downloadFile = () => {
-    const finalContent = `${value}\n\n\n\nThis README was created with: [Readme Builder](https://example.com/demo)`;
+    const finalContent =
+      sections.map((section) => section.content).join("\n\n") +
+      "\n\n\n\nThis README was created with: [Readme Builder](https://example.com/demo)";
     const blob = new Blob([finalContent], { type: "text/markdown" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -86,7 +84,9 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
   };
 
   const copyToClipboard = () => {
-    const finalContent = `${value}\n\n\n\nThis README was created with: [Readme Builder](https://example.com/demo)`;
+    const finalContent =
+      sections.map((section) => section.content).join("\n\n") +
+      "\n\n\n\nThis README was created with: [Readme Builder](https://example.com/demo)";
     navigator.clipboard.writeText(finalContent).then(
       () => alert("Contenido copiado al portapapeles!"),
       (err) => alert("Error al copiar: " + err)
@@ -98,13 +98,22 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
   };
 
   useEffect(() => {
-    if (selectedSectionId === "section-13" && skilliconsLink) {
-      setValue((prevValue) => {
-        const regex = /https:\/\/skillicons.dev\/icons\?i=[\w,]+/;
-        return prevValue.replace(regex, skilliconsLink);
-      });
+    if (selectedSectionId === "13" && skilliconsLink) {
+      setSections((prevSections) =>
+        prevSections.map((section) =>
+          section.id === selectedSectionId
+            ? {
+                ...section,
+                content: section.content.replace(
+                  /https:\/\/skillicons.dev\/icons\?i=[\w,]+/,
+                  skilliconsLink
+                ),
+              }
+            : section
+        )
+      );
     }
-  }, [skilliconsLink]);
+  }, [selectedSectionId, skilliconsLink]);
 
   return (
     <div className="flex flex-col lg:flex-row space-x-4 p-6 border border-gray-700 bg-background text-white rounded-xl h-full max-h-screen">
@@ -142,8 +151,16 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
           } ${isOver ? "bg-gray-700" : ""}`}
         >
           <MDEditor
-            value={value}
-            onChange={handleChange}
+            value={sections.map((section) => section.content).join("\n\n")}
+            onChange={(newValue) => {
+              const updatedSections = (newValue ?? "")
+                .split("\n\n")
+                .map((content, index) => ({
+                  id: sections[index]?.id || `${index}`,
+                  content,
+                }));
+              setSections(updatedSections);
+            }}
             preview="edit"
             className="h-full w-full rounded-lg border-non bg-red-500"
             height="100%"
@@ -161,7 +178,7 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
         </div>
 
         <div className="markdown-preview">
-          {getSections(value).map((section) => (
+          {sections.map((section) => (
             <div
               key={section.id}
               ref={(el) => {
@@ -189,7 +206,7 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
                 </div>
               )}
 
-              {section.id == "section-13" && (
+              {section.id == "13" && (
                 <Button
                   onClick={() => handleEditInfoClick(section.id)}
                   size="small"

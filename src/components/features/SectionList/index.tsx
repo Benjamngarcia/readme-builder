@@ -43,7 +43,7 @@ const SectionList: FC = () => {
 
   return (
     <div className="w-[90%] max-h-[80vh] p-4 bg-background text-white border border-gray-700 rounded-lg space-y-4 overflow-hidden">
-      {selectedSectionId === "section-13" && (
+      {selectedSectionId === "13" && (
         <Button
           onClick={() => setSelectedSectionId(null)}
           variant="outlined"
@@ -54,10 +54,10 @@ const SectionList: FC = () => {
         </Button>
       )}
       <div className="font-bold text-xl mb-4">
-        {selectedSectionId === "section-13" ? "Technologies" : "Sections"}
+        {selectedSectionId === "13" ? "Technologies" : "Sections"}
       </div>
       <p className="text-sm text-gray-400">
-        {selectedSectionId === "section-13"
+        {selectedSectionId === "13"
           ? "Select the technologies that you wish display."
           : "Drag and drop sections to rearrange them."}
       </p>
@@ -66,14 +66,14 @@ const SectionList: FC = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder={
-            selectedSectionId === "section-13"
+            selectedSectionId === "13"
               ? "Search Technologies..."
               : "Search Sections..."
           }
         />
       </div>
 
-      {selectedSectionId === "section-13" ? (
+      {selectedSectionId === "13" ? (
         <TechnologiesList filteredTechnologies={filteredTechnologies} />
       ) : (
         <div className="overflow-y-auto max-h-[60vh] space-y-2 pr-4">
