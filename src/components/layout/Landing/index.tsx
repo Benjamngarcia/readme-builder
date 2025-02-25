@@ -1,18 +1,19 @@
 import React, { FC } from 'react';
+import Link from 'next/link';
 import { IconArrowRight } from '@tabler/icons-react';
 
 const Landing: FC = () => (
-  <div className="bg-backgroundSecondary text-gray-900">
+  <div className="bg-backgroundSecondary text-white">
     {/* Hero Section */}
-    <section className="text-center py-20 bg-backgroundSecondary text-white relative">
+    <section className="text-center py-20 bg-background text-white relative">
       <div className="container mx-auto px-6">
         <h1 className="text-4xl font-bold">Create Your README.md in Minutes</h1>
         <p className="mt-4 text-lg">Generate professional documentation for your projects quickly and effortlessly with our intuitive README builder.</p>
         <div className="mt-6 flex justify-center">
-          <button className="px-6 py-3 border-2 border-blue-600 text-blue-600 rounded-full transition-transform transform hover:scale-105 flex items-center justify-center">
+          <Link href="/editor" className="px-6 py-3 border-2 border-blue-600 text-blue-600 rounded-full transition-transform transform hover:scale-105 flex items-center justify-center">
             <IconArrowRight size={16} className="mr-2" />
             Get Started Now
-          </button>
+          </Link>
         </div>
       </div>
     </section>
@@ -48,9 +49,9 @@ const Landing: FC = () => (
     <section className="relative -mt-24 -mb-24">
       <div className="container mx-auto px-6">
         <img
-          src="https://placehold.co/600x400"
+          src="./mockup.png"
           alt="App Demo"
-          className="mx-auto rounded-lg shadow-lg w-full max-w-4xl -mt-24 z-10"
+          className="mx-auto rounded-lg shadow-lg w-full  -mt-24 z-10"
         />
       </div>
     </section>
