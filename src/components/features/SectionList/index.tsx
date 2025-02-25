@@ -10,7 +10,8 @@ import Button from "../../../components/ui/Button";
 import { useEditorContext } from "../../../context/EditorContext";
 import { availableTechnologies } from "../../../utils/availableTechnologies";
 import { IconArrowLeft } from "@tabler/icons-react";
-import TechnologiesList from "@/components/ui/TechnologiesList";
+import TechnologiesList from "../../../components/ui/TechnologiesList";
+import GithubStats from "../../../components/ui/GithubStats";
 
 const SectionList: FC = () => {
   const { selectedSectionId, setSelectedSectionId } = useEditorContext();
@@ -41,9 +42,42 @@ const SectionList: FC = () => {
     setIsModalOpen(false);
   };
 
+  const renderEditSections = () => {
+    switch (selectedSectionId) {
+      case "13":
+        return <TechnologiesList filteredTechnologies={filteredTechnologies} />;
+      case "21":
+        return <GithubStats />;
+      case "23":
+        return <GithubStats />;
+      default:
+        return (
+          <div className="overflow-y-auto max-h-[60vh] space-y-2 pr-4">
+            {filteredSections.map((section) => (
+              <DraggableSection
+                key={section.id}
+                section={section}
+                isSelected={selectedSection === section.id}
+                onSelect={() => handleSelect(section.id)}
+              />
+            ))}
+            <Button
+              onClick={() => setIsModalOpen(true)}
+              variant="colored"
+              color="blue"
+            >
+              + Custom Section
+            </Button>
+          </div>
+        );
+    }
+  };
+
   return (
     <div className="w-[90%] max-h-[80vh] p-4 bg-background text-white border border-gray-700 rounded-lg space-y-4 overflow-hidden">
-      {selectedSectionId === "13" && (
+      {selectedSectionId === "13" ||
+      selectedSectionId === "21" ||
+      selectedSectionId === "23" ? (
         <Button
           onClick={() => setSelectedSectionId(null)}
           variant="outlined"
@@ -52,50 +86,36 @@ const SectionList: FC = () => {
         >
           Back to Editor
         </Button>
-      )}
+      ) : null}
       <div className="font-bold text-xl mb-4">
-        {selectedSectionId === "13" ? "Technologies" : "Sections"}
+        {selectedSectionId === "13"
+          ? "Technologies"
+          : selectedSectionId === "21" || selectedSectionId === "23"
+          ? "Custom your widget"
+          : "Sections"}
       </div>
       <p className="text-sm text-gray-400">
         {selectedSectionId === "13"
           ? "Select the technologies that you wish to display."
+          : selectedSectionId === "21" || selectedSectionId === "23"
+          ? "Complete the info to your widget"
           : "Drag and drop sections to rearrange them."}
       </p>
-      <div className="my-4">
-        <TextInput
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder={
-            selectedSectionId === "13"
-              ? "Search Technologies..."
-              : "Search Sections..."
-          }
-        />
-      </div>
+      {selectedSectionId === "13" || selectedSectionId === null ? (
+        <div className="my-4">
+          <TextInput
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            placeholder={
+              selectedSectionId === "13"
+                ? "Search Technologies..."
+                : "Search Sections..."
+            }
+          />
+        </div>
+      ) : null}
 
-      {selectedSectionId === "13" ? (
-        <div className="min-h-[60vh]"> {/* Height adjusted here */}
-          <TechnologiesList filteredTechnologies={filteredTechnologies} />
-        </div>
-      ) : (
-        <div className="overflow-y-auto max-h-[60vh] space-y-2 pr-4">
-          {filteredSections.map((section) => (
-            <DraggableSection
-              key={section.id}
-              section={section}
-              isSelected={selectedSection === section.id}
-              onSelect={() => handleSelect(section.id)}
-            />
-          ))}
-          <Button
-            onClick={() => setIsModalOpen(true)}
-            variant="colored"
-            color="blue"
-          >
-            + Custom Section
-          </Button>
-        </div>
-      )}
+      {renderEditSections()}
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

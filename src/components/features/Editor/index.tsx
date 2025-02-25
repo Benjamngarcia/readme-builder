@@ -20,8 +20,12 @@ import Button from "../../../components/ui/Button";
 import { useEditorContext } from "../../../context/EditorContext";
 
 const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
-  const { selectedSectionId, skilliconsLink, setSelectedSectionId } =
-    useEditorContext();
+  const {
+    selectedSectionId,
+    skilliconsLink,
+    setSelectedSectionId,
+    statsWidgetDetails,
+  } = useEditorContext();
   const [sections, setSections] = useState([
     { id: "0", content: "**Welcome to your custom README.md**" },
   ]);
@@ -112,7 +116,31 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
         )
       );
     }
-  }, [selectedSectionId, skilliconsLink]);
+
+    if (selectedSectionId === "21" && statsWidgetDetails) {
+      const widgetContent = `## GitHub Profile - Stats 📊
+![GitHub Stats](https://github-readme-stats.vercel.app/api?username=${statsWidgetDetails.profile}&show_icons=true&count_private=true&hide=prs&hide_title=true&theme=${statsWidgetDetails.theme}&hide_border=${statsWidgetDetails.hideBorder})`;
+      setSections((prevSections) =>
+        prevSections.map((section) =>
+          section.id === selectedSectionId
+            ? { ...section, content: widgetContent }
+            : section
+        )
+      );
+    }
+
+    if (selectedSectionId === "23" && statsWidgetDetails) {
+      const widgetContent = `## GitHub Profile - GitHub Contributions 🌱
+![GitHub Contributions](https://github-readme-streak-stats.herokuapp.com/?user=${statsWidgetDetails.profile}&theme=${statsWidgetDetails.theme}&hide_border=${statsWidgetDetails.hideBorder})`;
+      setSections((prevSections) =>
+        prevSections.map((section) =>
+          section.id === selectedSectionId
+            ? { ...section, content: widgetContent }
+            : section
+        )
+      );
+    }
+  }, [selectedSectionId, skilliconsLink, statsWidgetDetails]);
 
   return (
     <div className="flex flex-col lg:flex-row space-x-4 p-6 border border-gray-700 bg-background text-white rounded-xl h-full max-h-screen">
@@ -201,7 +229,9 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
                   </Button>
                 )}
 
-                {section.id == "13" && (
+                {section.id == "13" ||
+                section.id === "21" ||
+                section.id === "23" ? (
                   <Button
                     onClick={() => handleEditInfoClick(section.id)}
                     size="small"
@@ -211,7 +241,7 @@ const Editor: FC = forwardRef<HTMLDivElement>((props, ref) => {
                   >
                     Edit Info
                   </Button>
-                )}
+                ) : null}
               </div>
 
               <ReactMarkdown

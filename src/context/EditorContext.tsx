@@ -5,6 +5,8 @@ interface EditorContextProps {
   setSelectedSectionId: (id: string | null) => void;
   skilliconsLink: string;
   setSkilliconsLink: (link: string) => void;
+  statsWidgetDetails: { profile: string; theme: string; hideBorder: boolean };
+  setStatsWidgetDetails: (details: { profile: string; theme: string; hideBorder: boolean }) => void;
 }
 
 interface EditorProviderProps {
@@ -16,6 +18,7 @@ const EditorContext = createContext<EditorContextProps | undefined>(undefined);
 export const EditorProvider: React.FC<EditorProviderProps> = ({ children }) => {
   const [selectedSectionId, setSelectedSectionId] = useState<string | null>(null);
   const [skilliconsLink, setSkilliconsLink] = useState<string>('');
+  const [statsWidgetDetails, setStatsWidgetDetails] = useState({ profile: '', theme: '', hideBorder: false });
 
   return (
     <EditorContext.Provider
@@ -24,6 +27,8 @@ export const EditorProvider: React.FC<EditorProviderProps> = ({ children }) => {
         setSelectedSectionId,
         skilliconsLink,
         setSkilliconsLink,
+        statsWidgetDetails,
+        setStatsWidgetDetails,
       }}
     >
       {children}
