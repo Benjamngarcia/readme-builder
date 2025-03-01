@@ -118,7 +118,7 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
     }
 
     if (selectedSectionId === "21" && statsWidgetDetails) {
-      const widgetContent = `## GitHub Profile - Stats 📊
+      const widgetContent = `## Stats 📊
 ![GitHub Stats](https://github-readme-stats.vercel.app/api?username=${statsWidgetDetails.profile}&show_icons=true&count_private=true&hide=prs&hide_title=true&theme=${statsWidgetDetails.theme}&hide_border=${statsWidgetDetails.hideBorder})`;
       setSections((prevSections) =>
         prevSections.map((section) =>
@@ -130,7 +130,7 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
     }
 
     if (selectedSectionId === "23" && statsWidgetDetails) {
-      const widgetContent = `## GitHub Profile - GitHub Contributions 🌱
+      const widgetContent = `## GitHub Contributions 🌱
 ![GitHub Contributions](https://github-readme-streak-stats.herokuapp.com/?user=${statsWidgetDetails.profile}&theme=${statsWidgetDetails.theme}&hide_border=${statsWidgetDetails.hideBorder})`;
       setSections((prevSections) =>
         prevSections.map((section) =>

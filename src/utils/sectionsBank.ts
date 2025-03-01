@@ -97,23 +97,23 @@ If you encounter any issues or have any questions, feel free to reach out. You c
   '19': `## Contact 📬
 For business inquiries, please contact us at [contact@example.com](mailto:contact@example.com).
 Follow us on [Twitter](https://twitter.com/example) and [LinkedIn](https://linkedin.com/company/example).`,
-  '20': `## GitHub Profile - About Me 👤
+  '20': `## About Me 👤
 Hi, I'm John Doe, a passionate developer focusing on full-stack development. I specialize in JavaScript, React, Node.js, and Python.`,
 
-  '21': `## GitHub Profile - Stats 📊
+  '21': `## Stats 📊
 ![John's GitHub Stats](https://github-readme-stats.vercel.app/api?username=yourusername&show_icons=true&count_private=true&hide=prs&hide_title=true)`,
 
-  '22': `## GitHub Profile - My Repos 📁
+  '22': `## My Repos 📁
 Here are some of my open-source projects:
 - [Repo 1](https://github.com/username/repo1)
 - [Repo 2](https://github.com/username/repo2)
 - [Repo 3](https://github.com/username/repo3)`,
 
-  '23': `## GitHub Profile - GitHub Contributions 🌱
+  '23': `## GitHub Contributions 🌱
 Here are my recent contributions:
 ![John's GitHub Contributions](https://github-readme-streak-stats.herokuapp.com/?user=yourusername&theme=dark&hide_border=true)`,
 
-  '24': `## GitHub Profile - Current Projects 🚀
+  '24': `## Current Projects 🚀
 Currently, I am working on:
 - [Project 1](https://github.com/username/project1)
 - [Project 2](https://github.com/username/project2)

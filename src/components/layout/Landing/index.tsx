@@ -1,69 +1,147 @@
-import React, { FC } from 'react';
-import Link from 'next/link';
-import { IconArrowRight } from '@tabler/icons-react';
+import React, { FC } from "react";
+import Link from "next/link";
+import {
+  IconArrowRight,
+  IconSparkles,
+  IconDeviceDesktop,
+  IconSettings,
+  IconRocket,
+} from "@tabler/icons-react";
+import HeroImage from "../../../assets/hero-image.png";
+import MemojiFer from "../../../assets/memoji-fer.jpg";
+import Mockup from "../../../assets/mockup.png";
 
 const Landing: FC = () => (
-  <div className="bg-backgroundSecondary text-white">
+  <div className="text-white">
     {/* Hero Section */}
-    <section className="text-center py-20 bg-background text-white relative">
-      <div className="container mx-auto px-6">
-        <h1 className="text-4xl font-bold">Create Your README.md in Minutes</h1>
-        <p className="mt-4 text-lg">Generate professional documentation for your projects quickly and effortlessly with our intuitive README builder.</p>
-        <div className="mt-6 flex justify-center">
-          <Link href="/editor" className="px-6 py-3 border-2 border-blue-600 text-blue-600 rounded-full transition-transform transform hover:scale-105 flex items-center justify-center">
-            <IconArrowRight size={16} className="mr-2" />
-            Get Started Now
-          </Link>
+    <section className="py-16 bg-background relative">
+      <div className="container mx-auto px-6 flex flex-col gap-2 md:flex-row items-center justify-between">
+        <div className="md:w-1/2">
+          <div className="mt-6 flex">
+            <span className="px-3 py-1 text-xs border-2 border-blue-500 text-blue-500 rounded-full transition-all duration-300 hover:bg-blue-500 hover:border-blue-500 hover:bg-opacity-20 flex items-center justify-center mb-8">
+              <IconSparkles size={16} className="mr-2" />
+              Build your README.md in seconds
+            </span>
+          </div>
+          <h1 className="text-4xl font-bold">
+            Create Your{" "}
+            <span className="markdown-body">
+              <code>README.md</code>
+            </span>{" "}
+            in Minutes
+          </h1>
+          <p className="mt-4 text-lg text-gray-500">
+            Generate professional documentation for your projects quickly and
+            effortlessly with our intuitive README builder.
+          </p>
+
+          <div className="mt-6 flex">
+            <Link
+              href="/editor"
+              className="px-6 py-3 border-2 border-gray-400 text-gray-400 rounded-md transition-transform transform hover:scale-105 flex items-center justify-center"
+            >
+              <IconArrowRight size={16} className="mr-2" />
+              Try it now
+            </Link>
+          </div>
+        </div>
+        <div className="md:w-1/2">
+          <img
+            src={HeroImage.src}
+            alt="App Demo"
+            className="mx-auto rounded-lg shadow-lg w-full max-w-[800px] z-10"
+          />
         </div>
       </div>
     </section>
 
     {/* Features */}
-    <section className="py-20 bg-background text-white relative mb-16">
+    <section className="pt-20 bg-background text-white relative">
       <div className="container mx-auto px-6">
         <h2 className="text-3xl font-semibold text-center">Key Features</h2>
         <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-10">
-          <div className="bg-gray-800 text-white p-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105">
-            <h3 className="text-xl font-semibold flex justify-center items-center">
-              🖥️ Easy to Use
+          <div className="bg-background border border-gray-500 text-white p-6 rounded-lg shadow-lg flex flex-col gap-4 h-full transform transition-all duration-300 hover:border-blue-500 relative overflow-hidden">
+            <div className="absolute inset-0 bg-blue-500 transform transition-all duration-500 hover:scale-100 opacity-0 hover:opacity-20 z-10"></div>
+            <h3 className="text-xl font-semibold">
+              <IconDeviceDesktop size={32} className="mr-2" />
             </h3>
-            <p className="mt-2 text-center">An intuitive interface that guides you step-by-step through the process of creating your README.md file.</p>
+            <h3 className="text-lg font-semibold">Easy to use</h3>
+            <p className="text-md text-gray-400">
+              An intuitive interface that guides you step-by-step through the
+              process of creating your README.md file.
+            </p>
           </div>
-          <div className="bg-gray-800 text-white p-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105">
-            <h3 className="text-xl font-semibold flex justify-center items-center">
-              ⚙️ Highly Customizable
+          <div className="bg-background border border-gray-500 text-white p-6 rounded-lg shadow-lg flex flex-col gap-4 h-full transform transition-all duration-300 hover:border-blue-500 relative overflow-hidden">
+            <div className="absolute inset-0 bg-blue-500 transform transition-all duration-500 hover:scale-100 opacity-0 hover:opacity-20 z-10"></div>
+            <h3 className="text-xl font-semibold">
+              <IconSettings size={32} className="mr-2" />
             </h3>
-            <p className="mt-2 text-center">Add custom sections to tailor the README to the specific needs of your project.</p>
+            <h3 className="text-lg font-semibold">Highly Customizable</h3>
+            <p className="text-md text-gray-400">
+              Add custom sections to tailor the README to the specific needs of
+              your project.
+            </p>
           </div>
-          <div className="bg-gray-800 text-white p-6 rounded-lg shadow-lg transform transition-all duration-300 hover:scale-105">
-            <h3 className="text-xl font-semibold flex justify-center items-center">
-              🚀 Fast Export
+          <div className="bg-background border border-gray-500 text-white p-6 rounded-lg shadow-lg flex flex-col gap-4 h-full transform transition-all duration-300 hover:border-blue-500 relative overflow-hidden">
+            <div className="absolute inset-0 bg-blue-500 transform transition-all duration-500 hover:scale-100 opacity-0 hover:opacity-20 z-10"></div>
+            <h3 className="text-xl font-semibold">
+              <IconRocket size={32} className="mr-2" />
             </h3>
-            <p className="mt-2 text-center">Generate and download your README.md file ready to use in seconds.</p>
+            <h3 className="text-lg font-semibold">Fast export</h3>
+            <p className="text-md text-gray-400">
+              Generate and download your README.md file ready to use in seconds.
+            </p>
           </div>
         </div>
       </div>
     </section>
 
     {/* Image Section */}
-    <section className="relative -mt-24 -mb-24">
-      <div className="container mx-auto px-6">
+    <section
+      style={{
+        backgroundImage: "url('/wave.svg')",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "bottom center",
+        backgroundSize: "cover",
+      }}
+    >
+      <div className="max-w-4xl h-fit mx-auto">
         <img
-          src="./mockup.png"
+          src={Mockup.src}
           alt="App Demo"
-          className="mx-auto rounded-lg shadow-lg w-full  -mt-24 z-10"
+          className="rounded-lg w-full"
         />
       </div>
     </section>
 
     {/* Testimonials */}
-    <section className="py-20 bg-background text-white mt-16">
+    <section className="pb-20 bg-background text-white mt-16">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-semibold text-center">What Our Users Are Saying</h2>
+        <h2 className="text-3xl font-semibold text-center">
+          What Our Users Are Saying
+        </h2>
         <div className="mt-10 flex justify-center">
-          <div className="w-full md:w-1/2 text-center">
-            <p className="text-lg italic">An essential tool for any developer. It saves me hours of work!</p>
-            <p className="mt-4 font-semibold">Ian Pérez</p>
+          <div className="w-full md:w-1/2 text-left flex items-start justify-between p-6 border-2 border-gray-500 rounded-lg shadow-lg bg-background">
+            <div className="flex flex-col">
+              <h3 className="text-xl font-semibold">Amazing Experience</h3>
+              <p className="mt-2 text-lg text-gray-400">
+                This app is a game-changer! It makes creating README files so
+                easy and fun.
+              </p>
+              <div className="mt-4 font-semibold text-gray-100 flex gap-3">
+                <div className="w-16 h-16 rounded-full overflow-hidden">
+                  <img
+                    src={MemojiFer.src}
+                    alt="User"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="justify-center flex flex-col p-2 rounded-lg">
+                  @fer_tru_
+                  <div className="text-sm text-gray-400">Frontend Developer</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
