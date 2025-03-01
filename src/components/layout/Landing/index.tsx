@@ -17,7 +17,7 @@ const Landing: FC = () => (
     <section className="py-16 bg-background relative">
       <div className="container mx-auto px-6 flex flex-col gap-2 md:flex-row items-center justify-between">
         <div className="md:w-1/2">
-          <div className="mt-6 flex">
+          <div className="flex">
             <span className="px-3 py-1 text-xs border-2 border-blue-500 text-blue-500 rounded-full transition-all duration-300 hover:bg-blue-500 hover:border-blue-500 hover:bg-opacity-20 flex items-center justify-center mb-8">
               <IconSparkles size={16} className="mr-2" />
               Build your README.md in seconds
@@ -38,7 +38,7 @@ const Landing: FC = () => (
           <div className="mt-6 flex">
             <Link
               href="/editor"
-              className="px-6 py-3 border-2 border-gray-400 text-gray-400 rounded-md transition-transform transform hover:scale-105 flex items-center justify-center"
+              className="flex items-center justify-center rounded-md focus:outline-none focus:ring-2 transition-all duration-300 border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white py-2 px-4 text-md space-x-2 gap-2"
             >
               <IconArrowRight size={16} className="mr-2" />
               Try it now

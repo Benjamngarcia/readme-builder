@@ -190,7 +190,7 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
               setSections(updatedSections);
             }}
             preview="edit"
-            className="h-full w-full rounded-lg border-non bg-red-500"
+            className="h-full w-full rounded-lg border-non bg-background"
             height="100%"
           />
         </div>
