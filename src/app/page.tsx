@@ -1,18 +1,11 @@
-"use client";
+"use server";
 
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { EditorProvider } from '../context/EditorContext';
-import Home from '../components/layout/Home';
+import Landing from '@/components/layout/Landing';
 
-function Editor() {
+function App() {
   return (
-    <EditorProvider>
-      <DndProvider backend={HTML5Backend}>
-        <Home />
-      </DndProvider>
-    </EditorProvider>
+    <Landing />
   );
 }
 
-export default Editor;
+export default App;

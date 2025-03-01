@@ -8,8 +8,8 @@ import Link from "next/link";
 export function Footer() {
   return (
     <div className="flex justify-center items-center p-4">
-      <div className="flex justify-between container items-center">
-        <div className="text-sm flex flex-row sm:flex-col items-center justify-center sm:justify-start w-full sm:w-auto">
+      <div className="flex flex-col sm:flex-row justify-between container items-center">
+        <div className="text-sm flex flex-col items-center justify-center sm:justify-start w-full sm:w-auto">
           <Link
             href="https://portfolio-benjamn.vercel.app/"
             target="_blank"
@@ -23,7 +23,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row items-center justify-between mt-4 sm:mt-0">
+        <div className="flex sm:flex-row items-center justify-between mt-4 sm:mt-0">
           <Link
             href="https://github.com/Benjamngarcia/readme-builder"
             target="_blank"
