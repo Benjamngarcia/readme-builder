@@ -1,5 +1,6 @@
 import React from "react";
 import { IconStar } from "@tabler/icons-react";
+import Button from "../../../components/ui/Button";
 
 const Navbar: React.FC = () => {
   return (
@@ -11,24 +12,18 @@ const Navbar: React.FC = () => {
               Readme Builder
             </a>
           </div>
-
-          {/* TODO: This button will be able later */}
-          <div className="flex space-x-4">
-            <a
+          <div className="flex items-center">
+            <Button
+              as="a"
               href="https://github.com/Benjamngarcia/readme-builder"
               target="_blank"
-              className="px-3 py-1 text-white rounded-md transition-all duration-300 transform hover:bg-gray-700 flex items-center justify-center"
+              variant="outlined"
+              color="gray"
+              icon={<IconStar size={16} />}
             >
-              <IconStar
-                size={12}
-                className="mr-2 transition-all duration-300 transform hover:scale-125"
-              />
-              GitHub
-            </a>
+              Star us on GitHub
+            </Button>
           </div>
-          {/* <div className="flex space-x-4">
-            <a href="#" className="text-lg hover:text-blue-400 transition-colors">Donate</a>
-          </div> */}
         </div>
       </div>
     </nav>

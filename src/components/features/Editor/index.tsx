@@ -95,7 +95,7 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
   const downloadFile = () => {
     const finalContent =
       sections.map((section) => section.content).join("\n\n") +
-      "\n\n\n\nThis README was created with: [Readme Builder](https://readmes-builder.vercel.app/)";
+      "\n\n\n\n> **This README was created with:** [Readme Builder](https://readmes-builder.vercel.app/)";
     const blob = new Blob([finalContent], { type: "text/markdown" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -123,7 +123,7 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
     if (selectedSectionId === "13" && skilliconsLink) {
       setSections((prevSections) =>
         prevSections.map((section) =>
-          section.id === selectedSectionId
+          section.originalId === selectedSectionId
             ? {
                 ...section,
                 content: section.content.replace(
@@ -141,7 +141,7 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
 ![GitHub Stats](https://github-readme-stats.vercel.app/api?username=${statsWidgetDetails.profile}&show_icons=true&count_private=true&hide=prs&hide_title=true&theme=${statsWidgetDetails.theme}&hide_border=${statsWidgetDetails.hideBorder})`;
       setSections((prevSections) =>
         prevSections.map((section) =>
-          section.id === selectedSectionId
+          section.originalId === selectedSectionId
             ? { ...section, content: widgetContent }
             : section
         )
@@ -150,10 +150,10 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
 
     if (selectedSectionId === "23" && statsWidgetDetails) {
       const widgetContent = `## GitHub Contributions 🌱
-![GitHub Contributions](https://readme-streak-stats.herokuapp.com/?user=${statsWidgetDetails.profile}&theme=${statsWidgetDetails.theme}&hide_border=${statsWidgetDetails.hideBorder})`;
+![GitHub Contributions](https://github-readme-streak-stats.herokuapp.com/?user=${statsWidgetDetails.profile}&theme=${statsWidgetDetails.theme}&hide_border=${statsWidgetDetails.hideBorder})`;
       setSections((prevSections) =>
         prevSections.map((section) =>
-          section.id === selectedSectionId
+          section.originalId === selectedSectionId
             ? { ...section, content: widgetContent }
             : section
         )
@@ -255,7 +255,7 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
                   section.originalId === "21" ||
                   section.originalId === "23") && (
                   <Button
-                    onClick={() => handleEditInfoClick(section.id)}
+                    onClick={() => handleEditInfoClick(section.originalId)}
                     size="small"
                     color="blue"
                     variant="outlined"

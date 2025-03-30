@@ -1,7 +1,7 @@
 "use client";
 
 import { FC, useState } from "react";
-import { Section, Template } from "../../../types";
+import { Section } from "../../../types";
 import { sectionsListArr } from "../../../utils/sectionsList";
 import DraggableSection from "../../ui/DraggableSection";
 import DraggableTemplate from "../../ui/DraggableTemplate";
@@ -91,13 +91,19 @@ const SectionList: FC = () => {
     }
   };
 
+  const handleBackToEditor = () => {
+    setSelectedSectionId(null);
+    setSelectedSection(null);
+    setSearchTerm("");
+  };
+
   return (
     <div className="w-[90%] max-h-[80vh] p-4 bg-background text-white border border-gray-700 rounded-lg space-y-4 overflow-hidden">
       {selectedSectionId === "13" ||
       selectedSectionId === "21" ||
       selectedSectionId === "23" ? (
         <Button
-          onClick={() => setSelectedSectionId(null)}
+          onClick={() => handleBackToEditor()}
           variant="outlined"
           color="gray"
           icon={<IconArrowLeft />}
@@ -106,25 +112,33 @@ const SectionList: FC = () => {
         </Button>
       ) : null}
 
-      {/* Switch entre Sections y Templates */}
-      <div className="inline-flex mb-4">
+      <div className="relative inline-flex items-center mb-4">
+        <div className="absolute inset-0 flex">
+          <div
+            className={`w-1/2 transition-transform duration-300 ease-in-out transform rounded-full
+        ${
+          viewMode === "sections"
+            ? "translate-x-0 bg-blue-500"
+            : "translate-x-full bg-blue-500"
+        }`}
+          />
+        </div>
+
         <button
           onClick={() => setViewMode("sections")}
-          className={`px-4 py-2 border  transition duration-300 ease-in-out rounded-l-full focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-            viewMode === "sections"
-              ? "border-blue-500 text-blue-500"
-              : "border-gray-700 bg-transparent text-white hover:bg-gray-700"
-          }`}
+          className={`relative z-10 px-4 py-2 w-1/2 text-center transition-colors duration-300 ease-in-out rounded-l-full
+      focus:outline-none focus:ring-0
+      ${viewMode === "sections" ? "text-white" : "text-blue-500"}`}
         >
           Sections
         </button>
+
+        {/* Botón: Templates */}
         <button
           onClick={() => setViewMode("templates")}
-          className={`px-4 py-2 border border-l-0 transition duration-300 ease-in-out rounded-r-full focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-            viewMode === "templates"
-              ? "border-blue-500 text-blue-500"
-              : "border-gray-700 bg-transparent text-white hover:bg-gray-700"
-          }`}
+          className={`relative z-10 px-4 py-2 w-1/2 text-center transition-colors duration-300 ease-in-out rounded-r-full
+      focus:outline-none focus:ring-0
+      ${viewMode === "templates" ? "text-white" : "text-blue-500"}`}
         >
           Templates
         </button>
