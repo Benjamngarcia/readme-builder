@@ -4,7 +4,7 @@ import { FC, useState, forwardRef, useRef, useEffect } from "react";
 import MDEditor from "@uiw/react-md-editor";
 import ReactMarkdown from "react-markdown";
 import { useDrop } from "react-dnd";
-import { Section } from "../../../types";
+import { Section, Template } from "../../../types";
 import { sectionBank } from "../../../utils/sectionsBank";
 import {
   IconCode,
@@ -27,19 +27,38 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
     statsWidgetDetails,
   } = useEditorContext();
   const [sections, setSections] = useState([
-    { id: "0", content: "**Welcome to your custom README.md**" },
+    {
+      id: "0",
+      content: "**Welcome to your custom README.md**",
+      originalId: "0",
+    },
   ]);
 
   const [selectedSection, setSelectedSection] = useState<string | null>(null);
-
   const sectionsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
-    accept: "section",
-    drop: (item: Section) => {
-      const sectionContent = sectionBank[item.id] || `## ${item.title}\n\n`;
-      const newSection = { id: item.id, content: sectionContent };
-      setSections((prevSections) => [...prevSections, newSection]);
+    accept: ["section", "template"],
+    drop: (item: Section | Template) => {
+      if ("type" in item && item.type === "template") {
+        item.sections.forEach((sectionId: string) => {
+          const sectionContent = sectionBank[sectionId] || `## Section\n\n`;
+          const newSection = {
+            id: `${sectionId}-${Date.now()}`,
+            content: sectionContent,
+            originalId: sectionId,
+          };
+          setSections((prevSections) => [...prevSections, newSection]);
+        });
+      } else {
+        const sectionContent = sectionBank[item.id] || `## ${item.title}\n\n`;
+        const newSection = {
+          id: `${item.id}-${Date.now()}`,
+          content: sectionContent,
+          originalId: item.id,
+        };
+        setSections((prevSections) => [...prevSections, newSection]);
+      }
     },
     collect: (monitor) => ({
       isOver: monitor.isOver(),
@@ -76,7 +95,7 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
   const downloadFile = () => {
     const finalContent =
       sections.map((section) => section.content).join("\n\n") +
-      "\n\n\n\nThis README was created with: [Readme Builder](https://readmes-builder.vercel.app/)";
+      "\n\n\n\n> **This README was created with:** [Readme Builder](https://readmes-builder.vercel.app/)";
     const blob = new Blob([finalContent], { type: "text/markdown" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -104,7 +123,7 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
     if (selectedSectionId === "13" && skilliconsLink) {
       setSections((prevSections) =>
         prevSections.map((section) =>
-          section.id === selectedSectionId
+          section.originalId === selectedSectionId
             ? {
                 ...section,
                 content: section.content.replace(
@@ -122,7 +141,7 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
 ![GitHub Stats](https://github-readme-stats.vercel.app/api?username=${statsWidgetDetails.profile}&show_icons=true&count_private=true&hide=prs&hide_title=true&theme=${statsWidgetDetails.theme}&hide_border=${statsWidgetDetails.hideBorder})`;
       setSections((prevSections) =>
         prevSections.map((section) =>
-          section.id === selectedSectionId
+          section.originalId === selectedSectionId
             ? { ...section, content: widgetContent }
             : section
         )
@@ -134,7 +153,7 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
 ![GitHub Contributions](https://github-readme-streak-stats.herokuapp.com/?user=${statsWidgetDetails.profile}&theme=${statsWidgetDetails.theme}&hide_border=${statsWidgetDetails.hideBorder})`;
       setSections((prevSections) =>
         prevSections.map((section) =>
-          section.id === selectedSectionId
+          section.originalId === selectedSectionId
             ? { ...section, content: widgetContent }
             : section
         )
@@ -146,7 +165,7 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
   return (
     <div className="flex flex-col lg:flex-row space-x-4 p-6 border border-gray-700 bg-background text-white rounded-xl h-full max-h-screen">
       {/* Code Editor Section */}
-      <div className="flex-grow min-h-full bg-backgroundSecondary rounded-lg shadow-lg p-4">
+      <div className="flex-grow min-h-full bg-backgroundSecondary rounded-lg shadow-lg p-4 overflow-hidden">
         <div className="flex justify-between items-center mb-4">
           <label className="flex items-center space-x-2 text-gray-300">
             <IconCode size={20} />
@@ -171,28 +190,30 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
             />
           </div>
         </div>
-
-        <div
-          ref={handleDropRef}
-          className={`flex-grow bg-rbackgroundSecondary p-4 rounded-lg border-2 border-dashed transition-all duration-300 ${
-            canDrop ? "border-blue-500" : "border-gray-500"
-          } ${isOver ? "bg-gray-700" : ""}`}
-        >
-          <MDEditor
-            value={sections.map((section) => section.content).join("\n\n")}
-            onChange={(newValue) => {
-              const updatedSections = (newValue ?? "")
-                .split("\n\n")
-                .map((content, index) => ({
-                  id: sections[index]?.id || `${index}`,
-                  content,
-                }));
-              setSections(updatedSections);
-            }}
-            preview="edit"
-            className="h-full w-full rounded-lg border-non bg-background"
-            height="100%"
-          />
+        <div className="max-w-[800px] mx-auto">
+          <div
+            ref={handleDropRef}
+            className={`max-h-[700px] overflow-y-auto bg-backgroundSecondary p-4 rounded-lg border-2 border-dashed transition-all duration-300 ${
+              canDrop ? "border-blue-500" : "border-gray-500"
+            } ${isOver ? "bg-gray-700" : ""}`}
+          >
+            <MDEditor
+              value={sections.map((section) => section.content).join("\n\n")}
+              onChange={(newValue) => {
+                const updatedSections = (newValue ?? "")
+                  .split("\n\n")
+                  .map((content, index) => ({
+                    id: sections[index]?.id || `${index}`,
+                    content,
+                    originalId: sections[index]?.originalId || `${index}`,
+                  }));
+                setSections(updatedSections);
+              }}
+              preview="edit"
+              className="w-full rounded-lg border-non bg-background"
+              height="100%"
+            />
+          </div>
         </div>
       </div>
 
@@ -230,11 +251,11 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
                   </Button>
                 )}
 
-                {section.id == "13" ||
-                section.id === "21" ||
-                section.id === "23" ? (
+                {(section.originalId === "13" ||
+                  section.originalId === "21" ||
+                  section.originalId === "23") && (
                   <Button
-                    onClick={() => handleEditInfoClick(section.id)}
+                    onClick={() => handleEditInfoClick(section.originalId)}
                     size="small"
                     color="blue"
                     variant="outlined"
@@ -242,7 +263,7 @@ const Editor: FC = forwardRef<HTMLDivElement>(() => {
                   >
                     Edit Info
                   </Button>
-                ) : null}
+                )}
               </div>
 
               <ReactMarkdown

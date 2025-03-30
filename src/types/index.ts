@@ -13,3 +13,10 @@ export interface Technology {
   label: string;
   icon: string;
 }
+
+export interface Template {
+  id: string;
+  title: string;
+  sections: string[];
+  type: "template";
+}

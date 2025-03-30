@@ -28,7 +28,7 @@ const Landing: FC = () => (
             <span className="markdown-body">
               <code>README.md</code>
             </span>{" "}
-            in Minutes
+            in Seconds
           </h1>
           <p className="mt-4 text-lg text-gray-500">
             Generate professional documentation for your projects quickly and
@@ -106,11 +106,7 @@ const Landing: FC = () => (
       }}
     >
       <div className="max-w-4xl h-fit mx-auto">
-        <img
-          src={Mockup.src}
-          alt="App Demo"
-          className="rounded-lg w-full"
-        />
+        <img src={Mockup.src} alt="App Demo" className="rounded-lg w-full" />
       </div>
     </section>
 
@@ -138,12 +134,33 @@ const Landing: FC = () => (
                 </div>
                 <div className="justify-center flex flex-col p-2 rounded-lg">
                   @fer_tru_
-                  <div className="text-sm text-gray-400">Frontend Developer</div>
+                  <div className="text-sm text-gray-400">
+                    Frontend Developer
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
+    <section className="py-12 bg-background text-white">
+      <div className="container mx-auto px-6 text-center">
+        <h2 className="text-3xl font-semibold mb-4">
+          Found a bug or got an idea?
+        </h2>
+        <p className="text-lg text-gray-500 mb-6">
+          If you discover any bug or have suggestions to improve the app, feel
+          free to send me a message on Instagram.
+        </p>
+        <Link
+          href="https://instagram.com/benjamngarcia"
+          target="_blank"
+          className="inline-flex items-center justify-center rounded-md focus:outline-none focus:ring-2 transition-all duration-300 border border-gray-500 text-gray-500 hover:bg-gray-500 hover:text-white py-2 px-4 text-md space-x-2 gap-2"
+        >
+          <IconArrowRight size={16} className="mr-2 transform -rotate-45" />
+          Message on Instagram
+        </Link>
       </div>
     </section>
   </div>

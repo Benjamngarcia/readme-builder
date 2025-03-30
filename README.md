@@ -31,12 +31,11 @@ Here are some screenshots of the project:
 ![Main Screen](https://firebasestorage.googleapis.com/v0/b/portafolio-689ca.appspot.com/o/Captura%20de%20pantalla%202025-02-25%20122227.png?alt=media&token=94140557-1e05-484c-8222-c307cae98f2e)
 
 ## To Do 📝
-- [ ]  Add README templates
+- [ x ]  Add README templates
 - [ ] Optimize performance for large README files
 
 ## Support 🙋‍♂️
 If you encounter any issues or have any questions, feel free to reach out. You can open an issue on the GitHub repository or contact us directly at bejamin.webdev3@gmail.com
 
 
-
-This README was created with: [Readme Builder](https://readmes-builder.vercel.app/)
+> **This README was created with:** [Readme Builder](https://readmes-builder.vercel.app/)

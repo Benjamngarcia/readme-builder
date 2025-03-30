@@ -2,22 +2,22 @@
 
 import { FC, forwardRef } from "react";
 import { useDrag } from "react-dnd";
-import { Section } from "../../../types";
+import { Template } from "@/types";
 import { IconGripVertical } from "@tabler/icons-react";
 
-interface DraggableSectionProps {
-  section: Section;
-  isSelected: boolean;
-  onSelect: () => void;
+interface DraggableTemplateProps {
+  template: Template;
+  isSelected?: boolean;
+  onSelect?: () => void;
 }
 
-const DraggableSection: FC<DraggableSectionProps> = forwardRef<
+const DraggableTemplate: FC<DraggableTemplateProps> = forwardRef<
   HTMLDivElement,
-  DraggableSectionProps
->(({ section, isSelected, onSelect }, ref) => {
+  DraggableTemplateProps
+>(({ template, isSelected = false, onSelect = () => {} }, ref) => {
   const [{ isDragging }, drag] = useDrag(() => ({
-    type: "section",
-    item: section,
+    type: "template",
+    item: template,
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -34,7 +34,8 @@ const DraggableSection: FC<DraggableSectionProps> = forwardRef<
     }
   };
 
-  DraggableSection.displayName = "DraggableSection";
+  DraggableTemplate.displayName = "DraggableTemplate";
+
   return (
     <div
       ref={dragRef}
@@ -45,10 +46,10 @@ const DraggableSection: FC<DraggableSectionProps> = forwardRef<
     >
       <IconGripVertical className="text-gray-400 hover:text-white" size={18} />
       <div className="flex items-center space-x-2">
-        <span className="text-white text-base">{section.title}</span>
+        <span className="text-white text-base">{template.title}</span>
       </div>
     </div>
   );
 });
 
-export default DraggableSection;
+export default DraggableTemplate;
